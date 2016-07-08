@@ -1,6 +1,10 @@
 'use strict'
 var error = require('./../errors.js');
 var Todo = require('./../Models/Todo.js');
+var Promise = require("bluebird");
+var mongoose = require("mongoose");
+
+Promise.promisifyAll(mongoose);
 
 class AddCommand {
   execute(data,callback) {
@@ -15,20 +19,20 @@ class AddCommand {
       deadline : data.deadline
     });
 
-    newTodo.save(function(err,todo) {
-      if(err){
-        erro = error.set('004');
-        success = false
-      }
-      console.log(todo);
-    })
+    newTodo.saveAsync()
+      .then(function(todo){
 
-    var success = {
-      success : true,
-      message : 'Added'
-    }
+      var success = {
+          success : true,
+          message : 'Added',
+          data : todo
+        }
 
-    callback(erro,success)
+        callback(erro,success)
+
+      })
+
+
   }
 }
 

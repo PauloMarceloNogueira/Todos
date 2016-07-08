@@ -22,10 +22,13 @@ app.get('/add/:name/:description/:deadline',(req,res) => {
   })
 })
 
-app.get('/get/:id?',(req,res) => {
+app.get('/get/:field?/:value?',(req,res) => {
     var param = false;
-    if(req.param('id')) {
-      param = req.param('id');
+    if(req.param('field') && req.param('value')) {
+      param = {
+        field : req.param('field'),
+        value : req.param('value')
+      }
     }
     command.execute('Get',param,function(err,data) {
       if(err) {

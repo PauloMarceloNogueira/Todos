@@ -6,7 +6,7 @@ var config = {
   debug : false,
   db : {
     host : 'mongodb://localhost/',
-    dbname : 'test'
+    dbname : 'Todo'
   }
 };
 

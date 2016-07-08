@@ -22,6 +22,7 @@ class Errors {
 
   set(error_code) {
     var data = {
+      success : false,
       error_code,
       message : this.mappingMessage(error_code)
     }
