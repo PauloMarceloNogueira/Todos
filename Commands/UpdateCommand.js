@@ -35,30 +35,6 @@ class UpdateCommand {
         callback(erro,data);
       })
     })
-
-
-
-      // .then(function(data) {
-      //   console.log(data,'Entrou')
-      //   if(!data) {
-      //     erro = error.set('003');
-      //     data = false;
-      //   }
-      //   data[0][params.field] = params.value;
-      //   data[0].saveAsync()
-      //     .then(function(msg) {
-      //       data = {
-      //         success : true,
-      //         data : {
-      //           message : 'Todo updated!'
-      //         }
-      //       }
-      //     })
-      //     callback(erro,data);
-      // })
-
-
-
   }
 
 }

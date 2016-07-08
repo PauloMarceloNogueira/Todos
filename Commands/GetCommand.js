@@ -17,18 +17,24 @@ class GetCommand {
       var value = param.value;
       query[fields] = value;
     }
-
     Todo.find(query)
       .then(function(data){
-        if (data == null || data =='') {
-          console.log('aqui')
+        if(data == ''){
           erro = error.set('002')
           success = false;
+          var data = {success}
+          callback(erro,data)
         }
         data = {
           success : true,
           data
         }
+        callback(erro,data)
+      })
+      .catch(function(e){
+        erro = error.set('002')
+        success = false;
+        var data = {success}
         callback(erro,data)
       })
   }

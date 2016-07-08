@@ -5,6 +5,19 @@ var command = require('./command.js');
 var db = require('./Server/db.js');
 
 db.connect();
+
+//Clear Headers
+app.use(function(req,res,next){
+  var _send = res.send;
+  var sent = false;
+  res.send = function(data){
+    if(sent) return;
+    _send.bind(res)(data);
+    sent = true;
+};
+  next();
+});
+
 app.get('/add/:name/:description/:deadline',(req,res) => {
 
   var data = {
@@ -17,7 +30,6 @@ app.get('/add/:name/:description/:deadline',(req,res) => {
     if(err) {
       res.send(err)
     }
-    console.log(success,'aqui')
     res.send(success)
   })
 })
@@ -56,7 +68,6 @@ app.get('/update/:id/:field/:value', (req,res) => {
   };
 
   command.execute('Update',params,function(err,data) {
-    console.log(data)
     res.send(data)
   })
 })

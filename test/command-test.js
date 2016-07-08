@@ -27,13 +27,13 @@ describe('AddCommand',function() {
 })
 
 describe('GetCommand',function() {
-  // it('Should return is empty',function() {
-  //   command.execute('Get','',function(err,success){
-  //     expect(err.error_code).to.equal('002');
-  //     expect(err.message).to.equal('Is empty');
-  //     expect(success).to.equal(false);
-  //   })
-  // })
+  it('Should return is empty',function() {
+    command.execute('Get','',function(err,success){
+      expect(err.error_code).to.equal('002');
+      expect(err.message).to.equal('Is empty');
+      expect(success).to.equal(false);
+    })
+  })
 
   it('Should return success message and data', function() {
     command.execute('Get','',function(err,data){
