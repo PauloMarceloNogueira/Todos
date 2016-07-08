@@ -46,7 +46,7 @@ describe('GetCommand',function() {
 
 describe('UpdateCommand', function() {
   var data = {
-    id : 90,
+    _id : 90,
     field : 'description',
     value : 'New description'
   }
@@ -60,7 +60,7 @@ describe('UpdateCommand', function() {
 
   it('Should return success message',function() {
     var data = {
-      id : 80,
+      _id : 80,
       field : 'description',
       value : 'New description'
     }
@@ -73,7 +73,7 @@ describe('UpdateCommand', function() {
 
   it('Should without params', function() {
     var data = {
-      id : 80,
+      _id : 80,
       field : 'description'
       //value : 'New description'
     }

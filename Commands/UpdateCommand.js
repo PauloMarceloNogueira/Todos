@@ -9,31 +9,54 @@ class UpdateCommand {
     var erro = false;
     var data = true;
 
-    if(params && params.field && params.value) {
+    if(!params && !params.field && !params.value) {
       erro = error.set('001');
       data = false;
+      callback(erro,data);
     }
+    Todo.findById(params.id,function(err,todo){
+      if(err){
+        return console.log('error',err);
+      }
+      todo[params.field] = params.value;
 
-    Todo.find({_id:params.id})
-      .then(function(data) {
-        console.log('lalalal')
-        if(!data) {
+      todo.save(function(err){
+        if(err){
           erro = error.set('003');
           data = false;
+          callback(erro,data);
         }
-        data[0][params.field] = params.value;
-        data[0].saveAsync()
-          .then(function(msg) {
-            data = {
-              success : true,
-              data : {
-                message : 'Todo updated!'
-              }
-            }
-          })
+        data = {
+            success : true,
+            data : {
+            message : 'Todo updated!'
+          }
+        }
+        callback(erro,data);
       })
+    })
 
-      callback(erro,data);
+
+
+      // .then(function(data) {
+      //   console.log(data,'Entrou')
+      //   if(!data) {
+      //     erro = error.set('003');
+      //     data = false;
+      //   }
+      //   data[0][params.field] = params.value;
+      //   data[0].saveAsync()
+      //     .then(function(msg) {
+      //       data = {
+      //         success : true,
+      //         data : {
+      //           message : 'Todo updated!'
+      //         }
+      //       }
+      //     })
+      //     callback(erro,data);
+      // })
+
 
 
   }

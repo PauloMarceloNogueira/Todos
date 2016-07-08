@@ -56,11 +56,8 @@ app.get('/update/:id/:field/:value', (req,res) => {
   };
 
   command.execute('Update',params,function(err,data) {
-    if(err) {
-      res.send(err);
-    }
-
-    res.send(data);
+    console.log(data)
+    res.send(data)
   })
 })
 
