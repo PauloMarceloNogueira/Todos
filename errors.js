@@ -14,6 +14,10 @@ class Errors {
       return 'Todo not found'
     }
 
+    if(error_code === '004') {
+      return 'MongoDB Error'
+    }
+
   }
 
   set(error_code) {

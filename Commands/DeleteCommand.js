@@ -1,5 +1,6 @@
 'use strict'
 var error = require('./../errors.js');
+var Todo = require('./../Models/Todo.js');
 
 class DeleteCommand {
   execute(params,callback) {

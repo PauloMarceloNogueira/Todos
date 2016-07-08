@@ -3,7 +3,7 @@ var error = require('./../errors.js');
 class GetCommand {
   execute(data,callback) {
     var erro = false;
-
+    
     var result = {
       name : 'Test',
       description : 'description Test',
