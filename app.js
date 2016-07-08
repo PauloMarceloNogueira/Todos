@@ -5,14 +5,17 @@ var command = require('./command.js');
 
 app.get('/add/:name/:description/:deadline',(req,res) => {
 
-  var data = {
-    name : req.param('name'),
-    description : req.param('description'),
-    deadline : req.param('deadline')
-  }
+  // var data = {
+  //   name : req.param('name'),
+  //   description : req.param('description'),
+  //   deadline : req.param('deadline')
+  // }
+  var data = '';
 
   command.execute('Add',data,function(err,succes) {
-    console.log(succes);
+    if(err) {
+      console.log(err)
+    }
   })
 
 

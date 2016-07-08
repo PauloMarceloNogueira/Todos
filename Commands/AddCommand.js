@@ -1,12 +1,17 @@
 'use strict'
-
+var error = require('./../errors.js');
 class AddCommand {
   execute(data,callback) {
-    erro = false;
+    var erro = false;
     if(data == '') {
-      var erro = true;
+      erro = error.set('001')
     }
-    callback(erro,'sucesso')
+    var success = {
+      success : true,
+      message : 'Added'
+    }
+    
+    callback(erro,success)
   }
 }
 
