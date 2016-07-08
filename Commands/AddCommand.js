@@ -1,16 +1,14 @@
 'use strict'
-var error = require('./../errors.js');
+var server = require('./../Server/server.js');
 var Todo = require('./../Models/Todo.js');
-var Promise = require("bluebird");
-var mongoose = require("mongoose");
 
-Promise.promisifyAll(mongoose);
+server.set().Promise.promisifyAll(server.set().mongoose);
 
 class AddCommand {
   execute(data,callback) {
     var erro = false;
     if(data == '') {
-      erro = error.set('001')
+      erro = server.set().error.set('001')
     }
 
     var newTodo = new Todo({

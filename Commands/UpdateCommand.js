@@ -1,7 +1,5 @@
 'use strict'
-var error = require('./../errors.js');
-var Promise = require("bluebird");
-var mongoose = require("mongoose");
+var server = require('./../Server/server.js');
 var Todo = require('./../Models/Todo.js');
 
 class UpdateCommand {
@@ -10,7 +8,7 @@ class UpdateCommand {
     var data = true;
 
     if(!params && !params.field && !params.value) {
-      erro = error.set('001');
+      erro = server.set()error.set('001');
       data = false;
       callback(erro,data);
     }
@@ -22,7 +20,7 @@ class UpdateCommand {
 
       todo.save(function(err){
         if(err){
-          erro = error.set('003');
+          erro = server.set()error.set('003');
           data = false;
           callback(erro,data);
         }

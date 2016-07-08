@@ -1,10 +1,8 @@
 'use strict'
-var error = require('./../errors.js');
-var Promise = require("bluebird");
-var mongoose = require("mongoose");
+var server = require('./../Server/server.js');
 var Todo = require('./../Models/Todo.js');
 
-Promise.promisifyAll(mongoose);
+server.set().Promise.promisifyAll(server.set().mongoose);
 
 class GetCommand {
   execute(param,callback) {
@@ -20,7 +18,7 @@ class GetCommand {
     Todo.find(query)
       .then(function(data){
         if(data == ''){
-          erro = error.set('002')
+          erro = server.set().error.set('002')
           success = false;
           var data = {success}
           callback(erro,data)
@@ -32,7 +30,7 @@ class GetCommand {
         callback(erro,data)
       })
       .catch(function(e){
-        erro = error.set('002')
+        erro = sserver.set().error.set('002')
         success = false;
         var data = {success}
         callback(erro,data)
