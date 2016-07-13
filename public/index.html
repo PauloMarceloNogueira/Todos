@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html ng-app="TodosApp">
+  <head>
+    <title>Todos</title>
+    <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/todos.js"></script>
+    <script src="js/core.js"></script>
+  </head>
+  <body ng-controller="mainController">
+    <div class="container">
+      <p>
+        Success {{todos.success}}
+        <div class="todos" ng-repeat="todo in todos.data">
+          <h5>{{todo.name}} | {{todo.description}}</h5>
+        </div>
+      </p>
+    </div>
+  </body>
+</html>

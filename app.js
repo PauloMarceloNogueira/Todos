@@ -6,10 +6,14 @@ var db = require('./Server/db.js');
 
 db.connect();
 
+app.use(express.static('public'));
+
 //Clear Headers
 app.use(function(req,res,next){
   var _send = res.send;
   var sent = false;
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods','GET,POST,OPTIONS');
   res.send = function(data){
     if(sent) return;
     _send.bind(res)(data);
@@ -35,6 +39,7 @@ app.get('/add/:name/:description/:deadline',(req,res) => {
 })
 
 app.get('/get/:field?/:value?',(req,res) => {
+    console.log('entrou')
     var param = false;
     if(req.param('field') && req.param('value')) {
       param = {
