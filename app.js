@@ -3,6 +3,9 @@ var app = express();
 var config = require('./Server/config.js');
 var command = require('./command.js');
 var db = require('./Server/db.js');
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 db.connect();
 
@@ -12,8 +15,6 @@ app.use(express.static('public'));
 app.use(function(req,res,next){
   var _send = res.send;
   var sent = false;
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Methods','GET,POST,OPTIONS');
   res.send = function(data){
     if(sent) return;
     _send.bind(res)(data);
@@ -22,12 +23,11 @@ app.use(function(req,res,next){
   next();
 });
 
-app.get('/add/:name/:description/:deadline',(req,res) => {
-
+app.post('/add',function(req,res){
   var data = {
-    name : req.param('name'),
-    description : req.param('description'),
-    deadline : req.param('deadline')
+    name : req.body.name,
+    description : req.body.description,
+    deadline : req.body.deadline
   }
 
   command.execute('Add',data,function(err,success) {
@@ -55,7 +55,7 @@ app.get('/get/:field?/:value?',(req,res) => {
     })
 })
 
-app.get('/delete/:id',(req,res) => {
+app.delete('/delete/:id',(req,res) => {
   command.execute('Delete',req.param('id'),function(err,data) {
     if(err) {
       res.send(err);

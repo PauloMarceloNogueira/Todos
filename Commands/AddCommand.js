@@ -19,7 +19,7 @@ class AddCommand {
 
     newTodo.saveAsync()
       .then(function(todo){
-
+      console.log('allalala');
       var success = {
           success : true,
           message : 'Added',
